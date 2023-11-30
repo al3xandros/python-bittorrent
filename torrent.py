@@ -8,7 +8,8 @@ from struct import pack, unpack
 from threading import Thread
 from time import sleep, time
 import types
-from urllib import urlencode, urlopen
+from urllib.parse import urlencode
+from urllib.request import urlopen
 from util import collapse, slice
 
 from bencode import decode, encode

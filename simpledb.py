@@ -30,7 +30,7 @@ class Database():
 		""" Return true if the database contains the key. """
 
 		key = dumps(key)
-		boolean = self.data.has_key(key)	# Returns 1 or 0.
+		boolean = key in self.data	# Returns 1 or 0.
 		return bool(boolean)
 
 	def __getitem__(self, key):
@@ -53,7 +53,7 @@ class Database():
 	def __repr__(self):
 		""" Represent the database. """
 
-		keys = self.data.keys()
+		keys = list(self.data.keys())
 		items = [(loads(key), loads(self.data[key])) for key in keys]
 		return str(dict(items))
 
@@ -65,20 +65,20 @@ class Database():
 	def items(self):
 		""" Return a list of tuples of the keys and values. """
 
-		keys = self.data.keys()
+		keys = list(self.data.keys())
 		items = [(loads(key), loads(self.data[key])) for key in keys]
 		return items
 
 	def keys(self):
 		""" Return a list of keys. """
 
-		keys = [loads(key) for key in self.data.keys()]
+		keys = [loads(key) for key in list(self.data.keys())]
 		return keys
 
 	def values(self):
 		""" Return a list of values. """
 
-		values = [loads(value) for value in self.data.values()]
+		values = [loads(value) for value in list(self.data.values())]
 		return values
 
 	def pop(self, key):

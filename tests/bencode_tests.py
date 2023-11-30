@@ -154,7 +154,7 @@ class Encode_Int(unittest.TestCase):
 	def test_leading_zeros(self):
 		""" Test that leading zeros are correctly removed. """
 
-		self.n = bencode.encode_int(01)
+		self.n = bencode.encode_int(0o1)
 		self.assertEqual(self.n, "i1e")
 
 	def test_exception_on_string(self):
@@ -272,31 +272,31 @@ class Encode_List(unittest.TestCase):
 		""" Test that a one item list is encoded correctly. """
 
 		self.n = bencode.encode_list([1])
-		self.assertEquals(self.n, "li1ee")
+		self.assertEqual(self.n, "li1ee")
 
 	def test_longer_list(self):
 		""" Test that a longer list is encoded correctly. """
 
 		self.n = bencode.encode_list([1, 2, 3])
-		self.assertEquals(self.n, "li1ei2ei3ee")
+		self.assertEqual(self.n, "li1ei2ei3ee")
 
 	def test_mixed_list(self):
 		""" Test that a mixed list is encoded correctly. """
 
 		self.n = bencode.encode_list([1, "one"])
-		self.assertEquals(self.n, "li1e3:onee")
+		self.assertEqual(self.n, "li1e3:onee")
 
 	def test_nested_list(self):
 		""" Test that a nested list is encoded correctly. """
 
 		self.n = bencode.encode_list([[1, 2], [3, 4]])
-		self.assertEquals(self.n, "lli1ei2eeli3ei4eee")
+		self.assertEqual(self.n, "lli1ei2eeli3ei4eee")
 
 	def test_empty_list(self):
 		""" Test that an empty list is encoded correctly. """
 
 		self.n = bencode.encode_list([])
-		self.assertEquals(self.n, "le")
+		self.assertEqual(self.n, "le")
 
 	def test_exception_on_string(self):
 		""" Test that an exception is raised when given a string. """
@@ -310,31 +310,31 @@ class Decode_List(unittest.TestCase):
 		""" Test that a one item list is decoded correctly. """
 
 		self.n = bencode.decode_list("li1ee")
-		self.assertEquals(self.n, [1])
+		self.assertEqual(self.n, [1])
 
 	def test_longer_list(self):
 		""" Test that a longer list is decoded correctly. """
 
 		self.n = bencode.decode_list("li1ei2ei3ee")
-		self.assertEquals(self.n, [1, 2, 3])
+		self.assertEqual(self.n, [1, 2, 3])
 
 	def test_mixed_list(self):
 		""" Test that a mixed list is decoded correctly. """
 
 		self.n = bencode.decode_list("li1e3:onee")
-		self.assertEquals(self.n, [1, "one"])
+		self.assertEqual(self.n, [1, "one"])
 
 	def test_nested_list(self):
 		""" Test that a nested list is decoded correctly. """
 
 		self.n = bencode.decode_list("lli1ei2eeli3ei4eee")
-		self.assertEquals(self.n, [[1, 2], [3, 4]])
+		self.assertEqual(self.n, [[1, 2], [3, 4]])
 
 	def test_empty_list(self):
 		""" Test that an empty list is decoded correctly. """
 
 		self.n = bencode.decode_list("le")
-		self.assertEquals(self.n, [])
+		self.assertEqual(self.n, [])
 
 	def test_exception_on_string(self):
 		""" Test that an exception is raised when given a string. """
@@ -348,25 +348,25 @@ class Encode_Dict(unittest.TestCase):
 		""" Test that a one key dict is encoded correctly. """
 
 		self.n = bencode.encode_dict({"key":"value"})
-		self.assertEquals(self.n, "d3:key5:valuee")
+		self.assertEqual(self.n, "d3:key5:valuee")
 
 	def test_longer_dict(self):
 		""" Test that a longer dict is encoded correctly. """
 
 		self.n = bencode.encode_dict({"key_1":"value_1", "key_2":"value_2"})
-		self.assertEquals(self.n, "d5:key_17:value_15:key_27:value_2e")
+		self.assertEqual(self.n, "d5:key_17:value_15:key_27:value_2e")
 
 	def test_mixed_dict(self):
 		""" Test that a dict with a list value is encoded correctly. """
 
 		self.n = bencode.encode_dict({'key': ['a', 'b']})
-		self.assertEquals(self.n, "d3:keyl1:a1:bee")
+		self.assertEqual(self.n, "d3:keyl1:a1:bee")
 
 	def test_nested_dict(self):
 		""" Test that a nested dict is encoded correctly. """
 
 		self.n = bencode.encode_dict({"key":{"key":"value"}})
-		self.assertEquals(self.n, "d3:keyd3:key5:valueee")
+		self.assertEqual(self.n, "d3:keyd3:key5:valueee")
 
 	def test_exception_on_string(self):
 		""" Test that an exception is raised when given a string. """
@@ -380,25 +380,25 @@ class Decode_Dict(unittest.TestCase):
 		""" Test that a one key dict is decoded correctly. """
 
 		self.n = bencode.decode_dict("d3:key5:valuee")
-		self.assertEquals(self.n, {"key":"value"})
+		self.assertEqual(self.n, {"key":"value"})
 
 	def test_longer_dict(self):
 		""" Test that a longer dict is decoded correctly. """
 
 		self.n = bencode.decode_dict("d5:key_17:value_15:key_27:value_2e")
-		self.assertEquals(self.n, {"key_1":"value_1", "key_2":"value_2"})
+		self.assertEqual(self.n, {"key_1":"value_1", "key_2":"value_2"})
 
 	def test_mixed_dict(self):
 		""" Test that a dict with a list value is decoded correctly. """
 
 		self.n = bencode.decode_dict("d3:keyl1:a1:bee")
-		self.assertEquals(self.n, {'key': ['a', 'b']})
+		self.assertEqual(self.n, {'key': ['a', 'b']})
 
 	def test_nested_dict(self):
 		""" Test that a nested dict is decoded correctly. """
 
 		self.n = bencode.decode_dict("d3:keyd3:key5:valueee")
-		self.assertEquals(self.n, {"key":{"key":"value"}})
+		self.assertEqual(self.n, {"key":{"key":"value"}})
 
 	def test_exception_on_string(self):
 		""" Test that an exception is raised when given a string. """
@@ -426,13 +426,13 @@ class Encode(unittest.TestCase):
 		""" Test lists are encoded correctly. """
 
 		self.n = bencode.encode([1, 2, 3])
-		self.assertEquals(self.n, "li1ei2ei3ee")
+		self.assertEqual(self.n, "li1ei2ei3ee")
 
 	def test_dicts(self):
 		""" Test dicts are encoded correctly. """
 
 		self.n = bencode.encode({"key":"value"})
-		self.assertEquals(self.n, "d3:key5:valuee")
+		self.assertEqual(self.n, "d3:key5:valuee")
 
 class Decode(unittest.TestCase):
 	""" Check the decode() function works. As this dispatches to the other

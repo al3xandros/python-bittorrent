@@ -1,3 +1,4 @@
+from functools import reduce
 # util.py
 # A small collection of useful functions
 

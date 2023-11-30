@@ -26,19 +26,19 @@ class Database_Tests(unittest.TestCase):
 		self.assertEqual(self.db.data, {})
 
 	def test_has_key(self):
-		self.assertTrue(self.db.has_key("key"))
+		self.assertTrue("key" in self.db)
 
 	def test_get(self):
 		self.assertEqual(self.db.get("key"), "value")
 
 	def test_items(self):
-		self.assertEqual(self.db.items(), [("key", "value")])
+		self.assertEqual(list(self.db.items()), [("key", "value")])
 
 	def test_keys(self):
-		self.assertEqual(self.db.keys(), ["key"])
+		self.assertEqual(list(self.db.keys()), ["key"])
 
 	def test_values(self):
-		self.assertEqual(self.db.values(), ["value"])
+		self.assertEqual(list(self.db.values()), ["value"])
 
 	def test_pop_return(self):
 		self.assertEqual(self.db.pop("key"), "value")
