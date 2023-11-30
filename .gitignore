@@ -1,7 +1,11 @@
+# python
+**/*.pyc
+**/__pycache__/
+**/venv/
+
 *.db
 *.log
 *.gimmick
 test.txt
 *.iso
 *.torrent
-*.pyc
